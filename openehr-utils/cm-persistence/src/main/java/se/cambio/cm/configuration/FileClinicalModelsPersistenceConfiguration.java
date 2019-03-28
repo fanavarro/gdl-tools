@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Profile;
 import se.cambio.cm.model.archetype.dto.ArchetypeDTO;
+import se.cambio.cm.model.ehr.dto.EhrDTO;
 import se.cambio.cm.model.generic.dao.FileGenericCMElementDAO;
 import se.cambio.cm.model.generic.dao.GenericCMElementDAO;
 import se.cambio.cm.model.guide.dto.GuideDTO;
@@ -41,4 +42,10 @@ public class FileClinicalModelsPersistenceConfiguration {
     public GenericCMElementDAO<GuideDTO> guideDAO() {
         return new FileGenericCMElementDAO<>(GuideDTO.class, userConfigurationManager.getGuidesFolder());
     }
+    
+    @Bean(name = "EhrDAO")
+    public GenericCMElementDAO<EhrDTO> EhrDAO() {
+    	return new FileGenericCMElementDAO<>(EhrDTO.class, userConfigurationManager.getEhrsFolder());
+    }
+    
 }

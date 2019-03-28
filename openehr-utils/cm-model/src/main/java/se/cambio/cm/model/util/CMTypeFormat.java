@@ -2,6 +2,7 @@ package se.cambio.cm.model.util;
 
 public enum CMTypeFormat {
     ADL_FORMAT("adl"),
+    EHR_FORMAT("xml"),
     ADLS_FORMAT("adls"),
     OET_FORMAT("oet"),
     CSV_FORMAT("csv"),

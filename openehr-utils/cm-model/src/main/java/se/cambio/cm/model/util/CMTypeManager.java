@@ -2,6 +2,7 @@ package se.cambio.cm.model.util;
 
 import org.springframework.util.Assert;
 import se.cambio.cm.model.archetype.dto.ArchetypeDTO;
+import se.cambio.cm.model.ehr.dto.EhrDTO;
 import se.cambio.cm.model.guide.dto.GuideDTO;
 import se.cambio.cm.model.template.dto.TemplateDTO;
 import se.cambio.cm.model.terminology.dto.TerminologyDTO;
@@ -23,7 +24,9 @@ public class CMTypeManager {
         registerCMType(new CMType("archetypes", ArchetypeDTO.class, Arrays.asList(CMTypeFormat.ADL_FORMAT.getFormat(), CMTypeFormat.ADLS_FORMAT.getFormat())));
         registerCMType(new CMType("templates", TemplateDTO.class, Collections.singleton(CMTypeFormat.OET_FORMAT.getFormat())));
         registerCMType(new CMType("guidelines", GuideDTO.class, Collections.singleton(CMTypeFormat.GDL_FORMAT.getFormat())));
+        registerCMType(new CMType("ehrs", EhrDTO.class, Collections.singleton(CMTypeFormat.EHR_FORMAT.getFormat())));
         registerAdditionalCMTypes();
+        
     }
 
     private void registerAdditionalCMTypes() {

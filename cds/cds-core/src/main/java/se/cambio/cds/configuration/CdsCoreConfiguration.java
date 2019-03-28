@@ -14,6 +14,7 @@ import se.cambio.cm.controller.terminology.TerminologyService;
 import se.cambio.cm.model.facade.administration.delegate.ClinicalModelsService;
 import se.cambio.openehr.controller.session.configuration.ClinicalModelsCacheConfiguration;
 import se.cambio.openehr.controller.session.data.ArchetypeManager;
+import se.cambio.openehr.controller.session.data.ElectronicHealthRecords;
 
 @Configuration
 @PropertySources({
@@ -64,6 +65,11 @@ public class CdsCoreConfiguration {
     @Bean
     Guides guides(ClinicalModelsService clinicalModelsService, RuleEngineService ruleEngineService) {
         return new Guides(clinicalModelsService, ruleEngineService);
+    }
+    
+    @Bean
+    ElectronicHealthRecords electronicHealthRecords (ClinicalModelsService clinicalModelsService){
+    	return new ElectronicHealthRecords(clinicalModelsService);
     }
 
     @Bean

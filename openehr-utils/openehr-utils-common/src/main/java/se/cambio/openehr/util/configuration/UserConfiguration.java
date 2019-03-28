@@ -8,6 +8,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import se.cambio.openehr.util.UserConfigurationManager;
 
+import java.io.File;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +17,9 @@ import java.util.Map;
 @PropertySource(value = {"file:conf/UserConfig.properties", "file:${user.home}/.gdleditor/UserConfig.properties"}, ignoreResourceNotFound = true)
 public class UserConfiguration {
 
+
+	private static final File DEFAULT_REPO_FOLDER = new File(System.getProperty("user.home"), "clinical-models");
+	
     @Autowired
     private Environment environment;
 
@@ -32,11 +36,14 @@ public class UserConfiguration {
         String activeEngine = environment.getProperty(UserConfigurationManager.ACTIVE_RULE_ENGINE, "rule-drools-engine");
         userConfigurationManager.setActiveRuleEngine(activeEngine);
         Map<String, String> pathMap = new HashMap<>();
-        populatePathMap(pathMap, UserConfigurationManager.ARCHETYPES_FOLDER, "archetypes");
-        populatePathMap(pathMap, UserConfigurationManager.TEMPLATES_FOLDER, "templates");
-        populatePathMap(pathMap, UserConfigurationManager.TERMINOLOGIES_FOLDER, "terminologies");
-        populatePathMap(pathMap, UserConfigurationManager.GUIDELINES_FOLDER, "guidelines");
-        populatePathMap(pathMap, UserConfigurationManager.DOCUMENTS_FOLDER, "docs");
+        
+        
+        populatePathMap(pathMap, UserConfigurationManager.ARCHETYPES_FOLDER, DEFAULT_REPO_FOLDER.getAbsolutePath() +  "/archetypes");
+        populatePathMap(pathMap, UserConfigurationManager.TEMPLATES_FOLDER, DEFAULT_REPO_FOLDER.getAbsolutePath() +  "/templates");
+        populatePathMap(pathMap, UserConfigurationManager.TERMINOLOGIES_FOLDER, DEFAULT_REPO_FOLDER.getAbsolutePath() +  "/terminologies");
+        populatePathMap(pathMap, UserConfigurationManager.GUIDELINES_FOLDER, DEFAULT_REPO_FOLDER.getAbsolutePath() +  "/guidelines");
+        populatePathMap(pathMap, UserConfigurationManager.DOCUMENTS_FOLDER, DEFAULT_REPO_FOLDER.getAbsolutePath() +  "/docs");
+        populatePathMap(pathMap, UserConfigurationManager.EHRS_FOLDER, DEFAULT_REPO_FOLDER.getAbsolutePath() +  "/ehrs");
         userConfigurationManager.setPathMap(pathMap);
         return userConfigurationManager;
     }

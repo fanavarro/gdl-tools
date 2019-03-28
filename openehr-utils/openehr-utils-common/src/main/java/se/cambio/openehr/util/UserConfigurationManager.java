@@ -19,6 +19,7 @@ public class UserConfigurationManager {
     public static final String GUIDELINES_FOLDER = "GuidesFolder";
     public static final String TERMINOLOGIES_FOLDER = "TerminologiesFolder";
     public static final String DOCUMENTS_FOLDER = "DocumentsFolder";
+    public static final String EHRS_FOLDER = "EhrsFolder";
     public static final String CURRENT_DATE_TIME = "CurrentDateTime";
     public static final String LANGUAGE = "Messages/Language";
     public static final String COUNTRY = "Messages/Country";
@@ -57,6 +58,9 @@ public class UserConfigurationManager {
         return getCmFolder(DOCUMENTS_FOLDER, "docs");
     }
 
+    public CmFolder getEhrsFolder(){
+    	return getCmFolder(EHRS_FOLDER, "ehrs");
+    }
 
     public String getLanguage() {
         return language;
