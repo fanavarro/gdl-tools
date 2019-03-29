@@ -1,6 +1,16 @@
 package se.cambio.cm.model.ehr.dto;
 
+import java.io.IOException;
+import java.io.StringReader;
 import java.util.Date;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.w3c.dom.Document;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 import se.cambio.cm.model.util.CMElement;
 
@@ -14,6 +24,7 @@ public class EhrDTO implements CMElement{
 	private String format;
 	private String source;
 	private Date lastUpdate;
+	private Document xml;
 	
 	@Override
 	public String getId() {
@@ -43,6 +54,22 @@ public class EhrDTO implements CMElement{
 	@Override
 	public void setSource(String source) {
 		this.source = source;
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder builder;
+		try {
+			builder = factory.newDocumentBuilder();
+			xml = builder.parse(new InputSource(new StringReader(source)));
+		} catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SAXException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}       
+        
 	}
 	
 	@Override
@@ -53,6 +80,14 @@ public class EhrDTO implements CMElement{
 	@Override
 	public void setLastUpdate(Date lastUpdate) {
 		this.lastUpdate = lastUpdate;
+	}
+
+	public Document getXml() {
+		return xml;
+	}
+
+	public void setXml(Document xml) {
+		this.xml = xml;
 	}
 
 	@Override
