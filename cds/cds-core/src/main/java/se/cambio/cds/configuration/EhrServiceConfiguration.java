@@ -1,11 +1,11 @@
-package se.cambio.cds.model.facade.ehr.service.configuration;
+package se.cambio.cds.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import se.cambio.cds.model.facade.ehr.delegate.EhrService;
-import se.cambio.cds.model.facade.ehr.service.EhrServiceImpl;
+import se.cambio.cds.util.EhrServiceImpl;
 
 @Configuration
 @Profile("ehr-service")

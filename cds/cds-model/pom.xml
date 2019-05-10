@@ -18,6 +18,11 @@
 			<artifactId>cds-common</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.gdl-lang.gdl-tools</groupId> -->
+<!-- 			<artifactId>cds-core</artifactId> -->
+<!-- 			<version>${project.version}</version> -->
+<!-- 		</dependency> -->
 		<dependency>
 			<groupId>org.gdl-lang.gdl-tools</groupId>
 			<artifactId>gdl-model</artifactId>

@@ -1,5 +1,7 @@
 package se.cambio.cm.model.ehr.dto;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.Date;
@@ -9,7 +11,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
-import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import se.cambio.cm.model.util.CMElement;
@@ -58,7 +59,11 @@ public class EhrDTO implements CMElement{
 		DocumentBuilder builder;
 		try {
 			builder = factory.newDocumentBuilder();
-			xml = builder.parse(new InputSource(new StringReader(source)));
+			String trimSource = trim(source);
+			ByteArrayInputStream input = new ByteArrayInputStream(
+					trimSource.getBytes("UTF-8"));
+			xml = builder.parse(input);
+			xml.normalize();
 		} catch (ParserConfigurationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -103,6 +108,19 @@ public class EhrDTO implements CMElement{
 		builder.append(lastUpdate);
 		builder.append("]");
 		return builder.toString();
+	}
+	
+	private String trim(String input) {
+	    BufferedReader reader = new BufferedReader(new StringReader(input));
+	    StringBuffer result = new StringBuffer();
+	    try {
+	        String line;
+	        while ( (line = reader.readLine() ) != null)
+	            result.append(line.trim());
+	        return result.toString();
+	    } catch (IOException e) {
+	        throw new RuntimeException(e);
+	    }
 	}
 
 }
